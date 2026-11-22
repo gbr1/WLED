@@ -1108,7 +1108,26 @@ BusHub75Matrix::BusHub75Matrix(const BusConfig &bc) : Bus(bc.type, bc.start, bc.
                     15,  7, 17,        // R2_PIN, G2_PIN, B2_PIN,
                      8, 18, 10,  9, 16,//  A_PIN,  B_PIN,  C_PIN,  D_PIN,  E_PIN,
                     11, 13, 12 };      // LAT_PIN, OE_PIN,CLK_PIN
-
+  
+  #elif defined(HUB75_NANO_ESP32_PINOUT)   // Arduino Nano ESP32 (GPIO numbers)
+  mxconfig.gpio.r1  = 5;    // D2
+  mxconfig.gpio.g1  = 6;    // D3
+  mxconfig.gpio.b1  = 7;    // D4
+  mxconfig.gpio.r2  = 8;    // D5
+  mxconfig.gpio.g2  = 9;    // D6
+  mxconfig.gpio.b2  = 10;   // D7
+  mxconfig.gpio.a   = 1;    // A0
+  mxconfig.gpio.b   = 2;    // A1
+  mxconfig.gpio.c   = 3;    // A2
+  mxconfig.gpio.d   = 4;    // A3
+  mxconfig.gpio.e   = -1;   // 11 - A4 (needed for 1/32-scan 64x64; use -1 otherwise)
+  mxconfig.gpio.lat = 12;   // A5
+  mxconfig.gpio.oe  = 13;   // A6
+  mxconfig.gpio.clk = 14;   // A7
+  /*
+  mxconfig.clkphase = false;
+  mxconfig.i2sspeed = HUB75_I2S_CFG::HZ_10M; 
+  */
   #else
   DEBUGBUS_PRINTLN("MatrixPanel_I2S_DMA - S3 generic pinout");
   // HUB75_I2S_CFG::i2s_pins _pins={R1_PIN, G1_PIN, B1_PIN, R2_PIN, G2_PIN, B2_PIN, A_PIN, B_PIN, C_PIN, D_PIN, E_PIN, LAT_PIN, OE_PIN, CLK_PIN};
